@@ -1,0 +1,339 @@
+Last login: Tue Jan 21 12:43:10 on ttys001
+sahilkumar@SAHILs-MacBook-Air ~ % mysql -u root                                                                    
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 16
+Server version: 9.0.1 Homebrew
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| Assignment         |
+| ess                |
+| ess_institute      |
+| flutter_seminar    |
+| gini_institute     |
+| information_schema |
+| java_test          |
+| join_assignments   |
+| joinDemo           |
+| Mycompany          |
+| myDb               |
+| mysql              |
+| performance_schema |
+| sneha_institute    |
+| studentdb          |
+| sys                |
++--------------------+
+16 rows in set (0.06 sec)
+
+mysql> use ess;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++---------------+
+| Tables_in_ess |
++---------------+
+| students      |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> drop table students;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> create table students (id int primary key,name text,marks int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> create table students1 (id int,name text,marks int);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into students1 values (101,"sahil",99);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into students1 values (101,"sahil",99);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from students1;
++------+-------+-------+
+| id   | name  | marks |
++------+-------+-------+
+|  101 | sahil |    99 |
+|  101 | sahil |    99 |
++------+-------+-------+
+2 rows in set (0.00 sec)
+
+mysql> insert into students values (101,"sahil",99);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into students values (101,"sahil",99);
+ERROR 1062 (23000): Duplicate entry '101' for key 'students.PRIMARY'
+mysql> select * from students;
++-----+-------+-------+
+| id  | name  | marks |
++-----+-------+-------+
+| 101 | sahil |    99 |
++-----+-------+-------+
+1 row in set (0.00 sec)
+
+mysql> insert into students values (102,"Neeti",100) , (103,"Rahul",78) , (104,"Ravi",20),(105,"Dev",0);
+Query OK, 4 rows affected (0.04 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from students;
++-----+-------+-------+
+| id  | name  | marks |
++-----+-------+-------+
+| 101 | sahil |    99 |
+| 102 | Neeti |   100 |
+| 103 | Rahul |    78 |
+| 104 | Ravi  |    20 |
+| 105 | Dev   |     0 |
++-----+-------+-------+
+5 rows in set (0.01 sec)
+
+mysql> select name,marks  from students ;
++-------+-------+
+| name  | marks |
++-------+-------+
+| sahil |    99 |
+| Neeti |   100 |
+| Rahul |    78 |
+| Ravi  |    20 |
+| Dev   |     0 |
++-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from students where id=101;
++-----+-------+-------+
+| id  | name  | marks |
++-----+-------+-------+
+| 101 | sahil |    99 |
++-----+-------+-------+
+1 row in set (0.01 sec)
+
+mysql> select * from students where id in (101,104,105);
++-----+-------+-------+
+| id  | name  | marks |
++-----+-------+-------+
+| 101 | sahil |    99 |
+| 104 | Ravi  |    20 |
+| 105 | Dev   |     0 |
++-----+-------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from students where id between 101 and 104;
++-----+-------+-------+
+| id  | name  | marks |
++-----+-------+-------+
+| 101 | sahil |    99 |
+| 102 | Neeti |   100 |
+| 103 | Rahul |    78 |
+| 104 | Ravi  |    20 |
++-----+-------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from students;
++-----+-------+-------+
+| id  | name  | marks |
++-----+-------+-------+
+| 101 | sahil |    99 |
+| 102 | Neeti |   100 |
+| 103 | Rahul |    78 |
+| 104 | Ravi  |    20 |
+| 105 | Dev   |     0 |
++-----+-------+-------+
+5 rows in set (0.01 sec)
+
+mysql> select * from students order by marks asc ;
++-----+-------+-------+
+| id  | name  | marks |
++-----+-------+-------+
+| 105 | Dev   |     0 |
+| 104 | Ravi  |    20 |
+| 103 | Rahul |    78 |
+| 101 | sahil |    99 |
+| 102 | Neeti |   100 |
++-----+-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from students order by marks ;
++-----+-------+-------+
+| id  | name  | marks |
++-----+-------+-------+
+| 105 | Dev   |     0 |
+| 104 | Ravi  |    20 |
+| 103 | Rahul |    78 |
+| 101 | sahil |    99 |
+| 102 | Neeti |   100 |
++-----+-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from students order by marks desc ;
++-----+-------+-------+
+| id  | name  | marks |
++-----+-------+-------+
+| 102 | Neeti |   100 |
+| 101 | sahil |    99 |
+| 103 | Rahul |    78 |
+| 104 | Ravi  |    20 |
+| 105 | Dev   |     0 |
++-----+-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from students where marks>50 ;
++-----+-------+-------+
+| id  | name  | marks |
++-----+-------+-------+
+| 101 | sahil |    99 |
+| 102 | Neeti |   100 |
+| 103 | Rahul |    78 |
++-----+-------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from students where marks>50 and marks<90 ;
++-----+-------+-------+
+| id  | name  | marks |
++-----+-------+-------+
+| 103 | Rahul |    78 |
++-----+-------+-------+
+1 row in set (0.00 sec)
+
+mysql> select * from students where id=101 ;
++-----+-------+-------+
+| id  | name  | marks |
++-----+-------+-------+
+| 101 | sahil |    99 |
++-----+-------+-------+
+1 row in set (0.00 sec)
+
+mysql> select * from students where id<>101 ;
++-----+-------+-------+
+| id  | name  | marks |
++-----+-------+-------+
+| 102 | Neeti |   100 |
+| 103 | Rahul |    78 |
+| 104 | Ravi  |    20 |
+| 105 | Dev   |     0 |
++-----+-------+-------+
+4 rows in set (0.01 sec)
+
+mysql> select * from students where id!=101 ;
++-----+-------+-------+
+| id  | name  | marks |
++-----+-------+-------+
+| 102 | Neeti |   100 |
+| 103 | Rahul |    78 |
+| 104 | Ravi  |    20 |
+| 105 | Dev   |     0 |
++-----+-------+-------+
+4 rows in set (0.01 sec)
+
+mysql> alter table studens add contact text;
+ERROR 1146 (42S02): Table 'ess.studens' doesn't exist
+mysql> 
+mysql> 
+mysql> alter table students add contact text;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from students;
++-----+-------+-------+---------+
+| id  | name  | marks | contact |
++-----+-------+-------+---------+
+| 101 | sahil |    99 | NULL    |
+| 102 | Neeti |   100 | NULL    |
+| 103 | Rahul |    78 | NULL    |
+| 104 | Ravi  |    20 | NULL    |
+| 105 | Dev   |     0 | NULL    |
++-----+-------+-------+---------+
+5 rows in set (0.05 sec)
+
+mysql> desc students;
++---------+------+------+-----+---------+-------+
+| Field   | Type | Null | Key | Default | Extra |
++---------+------+------+-----+---------+-------+
+| id      | int  | NO   | PRI | NULL    |       |
+| name    | text | YES  |     | NULL    |       |
+| marks   | int  | YES  |     | NULL    |       |
+| contact | text | YES  |     | NULL    |       |
++---------+------+------+-----+---------+-------+
+4 rows in set (0.03 sec)
+
+mysql> alter table students modify column contact char(10);
+Query OK, 5 rows affected (0.08 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> desc students;
++---------+----------+------+-----+---------+-------+
+| Field   | Type     | Null | Key | Default | Extra |
++---------+----------+------+-----+---------+-------+
+| id      | int      | NO   | PRI | NULL    |       |
+| name    | text     | YES  |     | NULL    |       |
+| marks   | int      | YES  |     | NULL    |       |
+| contact | char(10) | YES  |     | NULL    |       |
++---------+----------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table students rename  column contact phone_no;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'phone_no' at line 1
+mysql> 
+mysql> alter table students rename  column contact to phone_no;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc students;
++----------+----------+------+-----+---------+-------+
+| Field    | Type     | Null | Key | Default | Extra |
++----------+----------+------+-----+---------+-------+
+| id       | int      | NO   | PRI | NULL    |       |
+| name     | text     | YES  |     | NULL    |       |
+| marks    | int      | YES  |     | NULL    |       |
+| phone_no | char(10) | YES  |     | NULL    |       |
++----------+----------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> select * from students;
++-----+-------+-------+----------+
+| id  | name  | marks | phone_no |
++-----+-------+-------+----------+
+| 101 | sahil |    99 | NULL     |
+| 102 | Neeti |   100 | NULL     |
+| 103 | Rahul |    78 | NULL     |
+| 104 | Ravi  |    20 | NULL     |
+| 105 | Dev   |     0 | NULL     |
++-----+-------+-------+----------+
+5 rows in set (0.00 sec)
+
+mysql> alter table students drop  column contact;
+ERROR 1091 (42000): Can't DROP 'contact'; check that column/key exists
+mysql> 
+mysql> alter table students drop  column phone_no;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from students;
++-----+-------+-------+
+| id  | name  | marks |
++-----+-------+-------+
+| 101 | sahil |    99 |
+| 102 | Neeti |   100 |
+| 103 | Rahul |    78 |
+| 104 | Ravi  |    20 |
+| 105 | Dev   |     0 |
++-----+-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> 
