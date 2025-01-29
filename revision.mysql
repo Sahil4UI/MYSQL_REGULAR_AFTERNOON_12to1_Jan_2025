@@ -1,0 +1,65 @@
+create database sql1;
+use sql1;
+
+create table employees (
+	id int auto_increment primary key,
+    name varchar(100),
+    department varchar(50),
+    salary int,
+    joining_date date
+    ) ;
+    
+    insert into employees (name,department,salary,joining_date) values
+    ("Aman","IT",60000,"2022-03-10"),
+    ("Priya","HR",50000,"2021-06-15"),
+    ("Raj","Finance",70000,"2020-08-20"),
+	("Simran","IT",65000,"2023-01-05"),
+    ("Karan","HR",48000,"2020-08-20"),
+	("Deepak","Finance",72000,"2019-09-25");
+    
+    -- Group by
+    -- how many employees are working each department 
+    select department,count(*) from employees group by department;
+	-- how many employees are working in IT department 
+	select department,count(*) from employees group by 
+    department having department = "IT";
+    
+    -- update
+    -- increase the salary of all IT department employees by 10%
+    update employees set salary = salary + salary*0.10 where department="IT";
+    select * from employees;
+    
+    -- Delete employees from HR department earning less than 50000
+    delete from employees where department="HR" and salary<50000;
+    select * from employees where department="HR";
+    
+    -- add new column experience in years
+    alter table employees add column experience int;
+    describe employees;
+    
+    -- removing column
+    alter table employees drop column experience;
+    
+    alter table employees modify column experience text; 
+	select * from employees;
+    
+    -- aggregate functions
+    -- no of employees
+    select count(*) as "no Of Employees" from employees;
+    
+    -- sorting employees in ascending order by salary
+--     select * from employees order by salary desc;
+    
+--     select * from employees where id!=1;
+
+select min(salary) as "minimum salary" , max(sALARY) as "maximum salary",
+round(avg(salary),2) as "average salary" from employees;
+-- Subqueries
+-- find details of employee whose SALARY is maximum 
+select * from employees where salary = (select max(salary) from employees);
+
+-- find the employee 
+select * from employees where 
+joining_date = (select min(joining_date) from employees);
+
+
