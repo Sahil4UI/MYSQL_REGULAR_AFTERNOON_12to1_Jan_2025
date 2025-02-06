@@ -1,0 +1,59 @@
+create database join_assignments;
+use join_assignments;
+
+insert into students values(4,"Ram",18,null);
+
+
+-- 	•	Fetch the names of all students and their course names.
+select name,course_name from students as s inner join courses as c on
+s.course_id=c.id;
+-- 	•	List all courses along with the names of their instructors.
+select course_name,name from courses as c inner join instructors as i
+on c.instructor_id=i.id;
+-- 	•	Display the details of students who are not enrolled in any course.
+select name,course_name from students as s left join courses as c on
+s.course_id=c.id where course_name is null;
+
+-- 	•	Find the list of courses in the "Science" department.
+select course_name,department from courses as c inner join instructors as i
+on c.instructor_id=i.id where department="Science";
+-- 	•	Fetch the names of students who scored more than 80 in any course.
+select name,grade from students as s inner join enrollments as e
+on s.id=e.student_id where grade>80;
+-- 	•	Display the total number of students enrolled in each course.
+select course_name ,count(*) from students as s inner join courses as c
+on s.course_id=c.id group by course_name;
+-- 	•	Fetch the names of students along with the grades they received in their courses.
+-- 	•	List all courses that have no students enrolled.
+-- 	•	Find the average grade of students in each course.
+-- 	•	Fetch the name of the instructor who teaches the "Mathematics" course.
+-- 	•	Find students who have enrolled in more than one course.
+-- 	•	List the names of students along with the departments of their course instructors.
+-- 	•	Fetch the details of students who scored the highest grade in any course.
+-- 	•	Find the list of instructors who are teaching no courses.
+-- 	•	Display the total number of courses taught by each instructor.
+-- 	•	Fetch the names of students and their grades for courses taught by "Dr. Khan".
+-- 	•	Display the list of students who scored less than 50 in any course.
+-- 	•	Fetch the name and grade of the student who scored the lowest in the "Science" course.
+-- 	•	List all students along with the names of the courses they are enrolled in, if any.
+-- 	•	Find the total number of students under each instructor.
+-- 	•	List all courses along with the total number of enrollments and the average grade.
+-- 	•	Fetch the details of courses that have more than 2 students enrolled.
+-- 	•	Find students who are older than 20 and enrolled in any course.
+-- 	•	Fetch the list of courses taught by instructors from the "Engineering" department.
+-- 	•	Find the names of students who have not received grades for any course.
+-- 	•	Display the details of courses along with the names of their instructors and enrolled students.
+-- 	•	Find the list of courses where the average grade is above 70.
+-- 	•	Fetch the details of students enrolled in "History" along with their grades.
+-- 	•	Find the instructor whose courses have the highest average grade.
+-- 	•	Display the number of students aged 21 and above enrolled in each course.
+-- 	•	Fetch the names of all students along with their instructors' names.
+-- 	•	List all courses with their instructor names where no students are enrolled.
+-- 	•	Find the names of students who are not enrolled in any course taught by "Prof. Verma".
+-- 	•	Display the details of students, their courses, and grades in descending order of grades.
+-- 	•	Fetch the names of instructors teaching more than one course.
+-- 	•	Find the list of students enrolled in courses taught by "Dr. Sharma".
+-- 	•	Fetch the total enrollment count across all courses.
+-- 	•	Find the instructor who teaches the maximum number of students.
+-- 	•	Display the details of students aged 19 or below along with their course names.
+-- 	•	List all courses with the total grade sum of their enrolled students.
