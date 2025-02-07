@@ -1,0 +1,33 @@
+create database constraints_demo;
+
+use constraints_demo;
+
+create table customers(
+customerID int primary key,
+name varchar(100)
+);
+
+insert into customers values
+(101,"Rahul"),
+(102,"Ankit"),
+(103,"Ramesh");
+
+
+create table orders
+(orderId int primary key,
+customerID int,
+foreign key (customerID) references customers(customerID)
+ON DELETE CASCADE
+-- agar customerID delete hui customers table me se
+-- to order tables me se bi delete hogi  
+);
+
+insert into orders values 
+(1,101),
+(2,102),
+(3,103);
+
+select * from customers;
+select * from orders;
+
+delete from customers where customerID=101;
