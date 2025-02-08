@@ -1,0 +1,73 @@
+create database subqueries;
+use subqueries;
+
+-- creating tables 
+create table departments
+(
+department_id int auto_increment PRIMARY KEY,
+department_name varchar(100),
+location_id int
+); 
+
+create table employees
+(employee_id int auto_increment primary key,
+name varchar(100),
+department_id int,
+salary decimal(10,2),
+foreign key (department_id) references departments(department_id)
+);
+
+-- Inserting Data
+insert into departments (department_name,location_id) values
+("HR",1000),
+("Sales",2000),
+("IT",3000),
+("Finance",4000);
+
+insert into employees (name,department_id,salary) values
+("John DOe",1,50000),
+("Jane Smith",2,60000), 
+("Emily Clark",2,70000),
+("Michael Brown",2,55000),
+("Sarah White",2,65000);
+
+-- un employees ka name & salary chahiye jo
+-- sales department me kaam krte hai
+
+select name,salary from employees
+ where department_id = (
+	select department_id from departments where
+    department_name = "Sales"
+ );  
+ 
+-- count number of employees in each department
+select department_name, (
+select count(*) from employees 
+where department_id=d.department_id
+) 
+from departments d; 
+
+select * from employees;
+select * from departments;
+-- update - increase the salary by 10% for "HR" Department
+update employees set salary = salary + salary *0.10
+where department_id = (
+	select department_id from departments 
+    where department_name ="HR"
+);
+
+-- find the name and salary of employee who is getting
+-- highest salary
+
+select name ,salary from employees where salary = 
+(select max(salary) from employees);
+
+-- find the details of employees where location id is 1000,2000
+--  select name from employees
+--  where department_id in 
+--  (select department_id from departments where location_id
+--  in (1000,2000));
+ 
+select e.name from employees as e inner join departments as d
+on e.department_id = d.department_id
+where d.location_id in (1000,2000); 
